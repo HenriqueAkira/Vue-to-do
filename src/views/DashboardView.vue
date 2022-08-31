@@ -4,9 +4,9 @@
 
     <h1 class="subtitle-1 grey--text" >Dashboard</h1>
 
-    <v-container fluid class="my-9">
+    <v-container fluid class="my-9 pa-16">
       <v-card flat class="pa-3" v-for="project in projects" :key="project.title">
-        <v-row :class="`pa-3 project ${project.status}`">
+        <v-row :class="`pa-3 project ${project.status}`" align="center">
           <v-col cols="12" md="6">
               <div class="caption grey--text">Project title</div>
               <div>{{project.title}}</div>
@@ -19,9 +19,10 @@
               <div class="caption grey--text">Due by</div>
               <div>{{project.due}}</div>
           </v-col>
-          <v-col cols="2" sm="4" md="2">
-              <div class="caption grey--text">Status</div>
-              <div>{{project.status}}</div>
+          <v-col cols="12" sm="4" md="2">
+            <div id="chip" class="text-right"> 
+              <v-chip :class="`white--text caption ${project.status}`" >{{project.status}}</v-chip>
+            </div>
           </v-col>
         </v-row>
         <v-divider></v-divider>
@@ -87,5 +88,15 @@
   }
   .project.overdue{
     border-left: 4px solid tomato;
+  }
+
+  #chip .v-chip.complete{
+    background: #3cd1c2;
+  }
+  #chip .v-chip.ongoing{
+    background: #ffaa2c;
+  }
+  #chip .v-chip.overdue{
+    background: #f83e70;
   }
 </style>
