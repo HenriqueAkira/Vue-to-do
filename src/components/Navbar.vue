@@ -10,6 +10,31 @@
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
+
+        <v-menu offset-y open-on-hover>
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                text
+                color="grey"
+                dark
+                v-bind="attrs"
+                v-on="on"
+                >
+                    <v-icon left>mdi-chevron-down</v-icon>
+                    Menu
+                </v-btn>
+            </template>
+            <v-list>
+                <v-list-item
+                v-for="link in links"
+                :key="link.text"
+                router
+                :to="link.route"
+                >
+                    <v-list-item-title>{{link.text}}</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
         
         <v-btn text color="grey"> 
             <span>Sign Out</span>
@@ -28,6 +53,7 @@
                 </p>          
             </v-col>
         </v-row>
+        <Popup></Popup>
         <v-list>
             <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
                 <v-list-item-action>
@@ -44,7 +70,14 @@
 </template>
 
 <script>
+
+import Popup from './Popup.vue'
+
 export default {
+    components:{
+        Popup
+    },
+
     data(){
         return{
             drawer: false,
@@ -55,8 +88,10 @@ export default {
             ]
         }
     },
+    
     methods:{
-    }
+    },
+
 
 }
 </script>
