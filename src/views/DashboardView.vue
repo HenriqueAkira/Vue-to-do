@@ -7,15 +7,27 @@
     <v-container fluid class="my-9 pa-16">
 
       <v-row class="mb-9">
-        <v-btn small depressed class="mr-5 grey--text" @click="sortBy('title')">
-          <v-icon left small>mdi-folder</v-icon>
-          <span class="caption text-lowercase">By project name</span>
-        </v-btn>
 
-        <v-btn small depressed class="mr-5 grey--text" @click="sortBy('person')">
-          <v-icon left small>mdi-account</v-icon>
-          <span class="caption text-lowercase">By person</span>
-        </v-btn>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn small depressed class="mr-5 grey--text" @click="sortBy('title')"  v-bind="attrs" v-on="on">
+              <v-icon left small>mdi-folder</v-icon>
+              <span class="caption text-lowercase">By project name</span>
+            </v-btn>
+          </template>
+          <span>Sort project by name</span>
+        </v-tooltip>
+
+        <v-tooltip top>
+          <template v-slot:activator="{on, attrs}">
+            <v-btn small depressed class="mr-5 grey--text" @click="sortBy('person')" v-bind="attrs" v-on="on">
+              <v-icon left small>mdi-account</v-icon>
+              <span class="caption text-lowercase">By person</span>
+            </v-btn>
+              
+          </template>
+          <span>Sort project by person</span>
+        </v-tooltip>
       </v-row>
       
       <v-card flat v-for="project in projects" :key="project.title">
