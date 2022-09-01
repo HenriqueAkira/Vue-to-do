@@ -32,7 +32,7 @@
       
       <v-card flat v-for="project in projects" :key="project.title">
         <v-row :class="`pa-3 project ${project.status}`" align="center">
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="6" >
               <div class="caption grey--text">Project title</div>
               <div>{{project.title}}</div>
           </v-col>

@@ -18,6 +18,16 @@
     </v-app-bar>
 
     <v-navigation-drawer app class="primary" temporary v-model="drawer">  
+        <v-row class="text-center">
+            <v-col class="mt-9">
+                <v-avatar size="100">
+                    <img src="/avatar-1.jpg" alt="avatar">
+                </v-avatar>      
+                <p class="white--text text-subtitle-1 mt-1">
+                    Henrique Yasuda
+                </p>          
+            </v-col>
+        </v-row>
         <v-list>
             <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
                 <v-list-item-action>
