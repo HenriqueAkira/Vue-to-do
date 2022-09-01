@@ -25,22 +25,27 @@
                     v-model="title"
                 ></v-text-field>
                 <v-textarea label="Information" v-model="content" prepend-icon="mdi-pencil"></v-textarea>
-                <v-btn color="success mx-0 mt-3" @click="submit">Submit</v-btn>
             </v-form>
+            
+            <v-menu max-width="290">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                        :value="formattedDate"
+                        label="Due date"
+                        prepend-icon="mdi-calendar"
+                        v-on="on"
+                        v-bind="attrs"
+                    ></v-text-field>
+                </template>
+                <v-date-picker v-model="due" ></v-date-picker>   
+            </v-menu>
+            <v-btn color="success mx-0 mt-3" @click="submit">Submit</v-btn>
+
         </v-card-text>
+        
 
         <v-divider></v-divider>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            text
-            @click="dialog = false"
-          >
-            I accept
-          </v-btn>
-        </v-card-actions>
     </v-card>
 
     
@@ -49,16 +54,24 @@
 
 <script>
 export default {
+
     data(){
         return{
             title: "",
-            content: ""
+            content: "",
+            due: null
         }
     },
 
     methods: {
         submit(){
             console.log(this.title, this.content);
+        }
+    },
+
+    computed:{
+        formattedDate() {
+            return this.due ? new Date(this.due).toUTCString().substring(0,16) : '' 
         }
     }
 
