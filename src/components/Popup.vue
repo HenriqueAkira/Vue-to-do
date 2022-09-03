@@ -16,20 +16,22 @@
         </v-card-title>
 
         <v-card-text>
-            <v-form class="px-3">
+            <v-form class="px-3" ref="form">
                 <v-text-field
+                    :rules="inputRules"
                     prepend-icon="mdi-folder"
                     name="name"
                     label="Title"
                     id="id"
                     v-model="title"
                 ></v-text-field>
-                <v-textarea label="Information" v-model="content" prepend-icon="mdi-pencil"></v-textarea>
+                <v-textarea label="Information" v-model="content" prepend-icon="mdi-pencil" :rules="inputRules"></v-textarea>
             </v-form>
             
             <v-menu max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                     <v-text-field
+                        :rules="inputRules"
                         :value="formattedDate"
                         label="Due date"
                         prepend-icon="mdi-calendar"
@@ -53,19 +55,33 @@
 </template>
 
 <script>
+import db from "@/fb";
 export default {
 
     data(){
         return{
             title: "",
             content: "",
-            due: null
+            due: null,
+            inputRules: [
+                v => v.length >= 3 || 'Minimun length is 3 characters'
+            ]
         }
     },
 
     methods: {
         submit(){
-            console.log(this.title, this.content);
+            if(this.$refs.form.validate()){
+                const project = {
+                    title: this.title,
+                    content: this.content,
+                    due: this.due,
+                    person: "One person",
+                    status: "ongoing"
+                }
+
+                db.collection('projects').add(project).then(() => {console.log("aa");})
+            }else alert("Err")
         }
     },
 
